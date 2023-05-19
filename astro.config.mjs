@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://flat35hd99.github.io',
+	base: '/play-astro',
 	integrations: [mdx(), sitemap()],
 });
