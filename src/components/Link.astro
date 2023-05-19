@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+
+let real_href: string;
+if (href instanceof URL) {
+    real_href = href.toString();
+} else if (typeof href === 'string') {
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+        real_href = href;
+    } else {
+        real_href = import.meta.env.BASE_URL.replace(/\/+$/, '') + href;
+    }
+} else {
+    throw new Error('Invalid href');
+}
+
+---
+
+<a href={real_href} {...props}>
+	<slot />
+</a>
